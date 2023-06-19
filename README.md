@@ -1,7 +1,7 @@
 # Forklift
 
 The forklift image provides utilities to facilitate lifting and dropping archived
-Docker images from a Nanobox warehouse.
+Docker images from a Microbox warehouse.
 
 #### Usage
 
@@ -10,7 +10,7 @@ Drop an image:
 ```
 docker run \
   --rm \
-  -i nanobox/forklift \
+  -i mubox/forklift \
   drop \
     archive=1234 \
     token=abcd \
@@ -27,7 +27,7 @@ docker \
   | docker \
       run \
       --rm \
-      -i nanobox/forklift \
+      -i mubox/forklift \
       lift \
         archive=1234 \
         token=abcd \
@@ -43,7 +43,7 @@ docker \
   | docker \
       run \
       --rm \
-      -i nanobox/forklift \
+      -i mubox/forklift \
       lift \
         archive=1234 \
         previous=2345 \

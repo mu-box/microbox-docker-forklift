@@ -18,12 +18,12 @@ docker run \
   --name=test-forklift \
   -d \
   --privileged \
-  --net=nanobox \
+  --net=microbox \
   --ip=192.168.0.55 \
-  --volume=${hookit_dir}/:/opt/nanobox/hooks \
+  --volume=${hookit_dir}/:/opt/microbox/hooks \
   --volume=${payload_dir}/:/payloads \
   --volume=${apps_dir}/simple-nodejs:/share/code \
-  nanobox/forklift \
+  mubox/forklift \
   /bin/sleep 365d
 
 # hop into the sandbox

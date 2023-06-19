@@ -7,14 +7,14 @@
 }
 
 @test "Upload image using forklift" {
-  run bash -c "docker save nanobox/redis:3.0 | docker run \
+  run bash -c "docker save mubox/redis:3.0 | docker run \
     --name=forklift \
     -i \
     --rm \
     --privileged \
-    --net=nanobox \
+    --net=microbox \
     --ip=192.168.0.101 \
-    nanobox/forklift \
+    mubox/forklift \
     lift archive=a token=123 host=192.168.0.100"
 
   echo "$output"
@@ -23,14 +23,14 @@
 }
 
 @test "Upload new image using forklift with previous archive" {
-  run bash -c "docker save nanobox/redis:3.2 | docker run \
+  run bash -c "docker save mubox/redis:3.2 | docker run \
     --name=forklift \
     -i \
     --rm \
     --privileged \
-    --net=nanobox \
+    --net=microbox \
     --ip=192.168.0.101 \
-    nanobox/forklift \
+    mubox/forklift \
     lift previous=a archive=b token=123 host=192.168.0.100"
 
   echo "$output"
@@ -39,13 +39,13 @@
 }
 
 @test "remove images before restoring" {
-  run docker rmi nanobox/redis:3.0
+  run docker rmi mubox/redis:3.0
 
   echo "$output"
 
   [ "$status" -eq 0 ]
 
-  run docker rmi nanobox/redis:3.2
+  run docker rmi mubox/redis:3.2
 
   echo "$output"
 
@@ -58,9 +58,9 @@
     -i \
     --rm \
     --privileged \
-    --net=nanobox \
+    --net=microbox \
     --ip=192.168.0.101 \
-    nanobox/forklift \
+    mubox/forklift \
     drop archive=a token=123 host=192.168.0.100 |
     docker load"
 
@@ -75,9 +75,9 @@
     -i \
     --rm \
     --privileged \
-    --net=nanobox \
+    --net=microbox \
     --ip=192.168.0.101 \
-    nanobox/forklift \
+    mubox/forklift \
     drop archive=b token=123 host=192.168.0.100 |
     docker load"
 

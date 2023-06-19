@@ -6,29 +6,29 @@ start_warehouse() {
     --name=warehouse \
     -d \
     --privileged \
-    --net=nanobox \
+    --net=microbox \
     --ip=192.168.0.100 \
-    nanobox/hoarder
+    mubox/hoarder
 
   # configure
   docker exec \
     warehouse \
-    /opt/nanobox/hooks/configure "$(configure_payload)"
+    /opt/microbox/hooks/configure "$(configure_payload)"
 
   sleep 2
 
   # start
   docker exec \
     warehouse \
-    /opt/nanobox/hooks/start "$(start_payload)"
+    /opt/microbox/hooks/start "$(start_payload)"
   sleep 1
   docker exec \
     warehouse \
-    /opt/gonano/sbin/sv stop hoarder
+    /opt/gomicro/sbin/sv stop hoarder
   sleep 1
   docker exec \
     warehouse \
-    /opt/gonano/sbin/sv start hoarder
+    /opt/gomicro/sbin/sv start hoarder
 }
 
 stop_warehouse() {

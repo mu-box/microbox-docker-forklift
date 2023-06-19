@@ -2,11 +2,11 @@
 .PHONY: all forklift
 
 all: forklift
-	
+
 forklift:
 	docker build \
-		-t nanobox/forklift \
+		-t mubox/forklift \
 		.
-		
-	docker push nanobox/forklift
-		
+
+	docker push mubox/forklift
+

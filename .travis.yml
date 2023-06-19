@@ -5,14 +5,14 @@ services:
 
 before_install:
   - docker version
-  - docker network create --driver=bridge --subnet=192.168.0.0/16 --opt="com.docker.network.driver.mtu=1450" --opt="com.docker.network.bridge.name=redd0" nanobox
+  - docker network create --driver=bridge --subnet=192.168.0.0/16 --opt="com.docker.network.driver.mtu=1450" --opt="com.docker.network.bridge.name=redd0" microbox
   - ifconfig
   - sudo apt-get -y install python-pip
   - sudo pip install docker==2.7.0 docker-squash
-  - docker pull nanobox/redis:3.0
-  - docker pull nanobox/redis:3.2
-  - docker pull nanobox/hoarder
-  - docker build -t nanobox/forklift .
+  - docker pull mubox/redis:3.0
+  - docker pull mubox/redis:3.2
+  - docker pull mubox/hoarder
+  - docker build -t mubox/forklift .
 
 script:
   - docker images
@@ -26,7 +26,7 @@ after_success:
   - docker-squash -t ${NAMESPACE}/forklift:squashed -f ubuntu:16.04 --tmp-dir /var/tmp/squasher ${NAMESPACE}/forklift
   - docker tag ${NAMESPACE}/forklift:squashed ${NAMESPACE}/forklift:beta;
   - docker push ${REMOTE}${NAMESPACE}/forklift:beta;
-  - if [ "$BRANCH" == "master" ]; then
+  - if [ "$BRANCH" == "main" ]; then
     docker tag ${NAMESPACE}/forklift:squashed ${NAMESPACE}/forklift;
     docker push ${REMOTE}${NAMESPACE}/forklift;
     else
